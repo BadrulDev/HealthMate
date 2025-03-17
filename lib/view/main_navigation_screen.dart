@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:healthmate/view/chatbotpage.dart';
 import 'package:healthmate/view/profilepage.dart';
+import 'activitypage.dart';
 import 'custom_nav_bar.dart';
 import 'homepage.dart';
 import 'chatbotpage.dart';
 
 class MainNavigationScreen extends StatefulWidget {
+  final int selectedIndex;
+
+  MainNavigationScreen({this.selectedIndex = 0});
+
   @override
   _MainNavigationScreenState createState() => _MainNavigationScreenState();
 }
@@ -18,6 +23,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     ChatbotPage(),
     ProfilePage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex; // Start with given index
+  }
 
   void _onNavTapped(int index) {
     setState(() {

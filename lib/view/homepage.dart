@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:healthmate/view/custom_app_bar.dart';
+import 'package:healthmate/view/sleeptrackingpage.dart';
 
+import 'activitypage.dart';
+import 'cognitiveassistantpage.dart';
+import 'glucosetrackingpage.dart';
 import 'languagebar.dart';
 
 
@@ -16,8 +20,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  final double lessThan6Hours = 82; // Example values
-  final double moreThan7Hours = 18;
+  final double lessThan6Hours = 100; // Example values
+  final double moreThan7Hours = 200;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,6 +32,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double totalsleep = lessThan6Hours + moreThan7Hours;
+    double lessThan6HoursPercentage = (lessThan6Hours / totalsleep) * 100;
+    double moreThan7HoursPercentage = (moreThan7Hours / totalsleep) * 100;
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: Colors.white,
@@ -90,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                             width: 70,
                             height: 70,
                             child: CircularProgressIndicator(
-                              value: lessThan6Hours / 100,
+                              value: lessThan6HoursPercentage / 100,
                               strokeWidth: 6,
                               backgroundColor: Colors.red,
                               valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
@@ -162,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   //value less than 6 hours aku declare kat atas
-                                  "${lessThan6Hours.toStringAsFixed(0)} %",
+                                  "${lessThan6HoursPercentage.toStringAsFixed(0)} %",
                                   style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -174,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   //value more than 7 hours aku declare kat atas
-                                  "${moreThan7Hours.toStringAsFixed(0)} %",
+                                  "${moreThan7HoursPercentage.toStringAsFixed(0)} %",
                                   style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ],
@@ -210,9 +217,26 @@ class _HomePageState extends State<HomePage> {
                           "Today's Activity",
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text("See All"),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const ActivityPage(fromHome: true,)),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF3674B5), // Background color
+                            foregroundColor: Colors.white, // Text color
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6), // Reduce padding
+                            minimumSize: const Size(70, 30), // Set a smaller height
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30), // Adjust corner radius if needed
+                            ),
+                          ),
+                          child: const Text(
+                            "See All",
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -224,32 +248,59 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             _buildActivityCard("Sleep Tracking", "assets/sleep.png", Color(0xFFFFF6E3), () {
-                              /*Navigator.push(
+                              Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const SleepTrackingPage()),
-                              );*/
+                                MaterialPageRoute(builder: (context) => SleepTrackingPage()),
+                              );
                             }),
                             _buildActivityCard("Cognitive Assistant", "assets/cognitive.png", Colors.lightBlue.shade100, () {
-                              /*Navigator.push(
+                              Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const CognitiveAssistantPage()),
-                              );*/
+                                MaterialPageRoute(builder: (context) => CognitiveAssistantPage()),
+                              );
                             }),
                             _buildActivityCard("Glucose Tracking", "assets/glucose.png", Colors.lightGreen.shade100, () {
-                              /*Navigator.push(
+                              Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const GlucoseTrackingPage()),
-                              );*/
+                                MaterialPageRoute(builder: (context) => GlucoseTrackingPage()),
+                              );
                             }),
                           ],
                         ),
                       ),
                     ),
-
+                    const SizedBox(height: 16),
+                    Text(
+                        "AI Chat",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      height: 100, // Same height as circular box
+                      width: double.infinity,
+                      padding: const EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0, bottom: 12.0), // Less top padding
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        "AI chatbox description",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF3674B5)),
+                      ),
+                    ),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
+
             ],
           ),
         ),

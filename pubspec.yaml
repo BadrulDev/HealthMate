@@ -31,25 +31,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  provider: ^6.1.0
-  firebase_core: ^2.27.2
-  firebase_auth: ^4.17.7
-  cloud_firestore: ^4.15.7
-  http: ^1.2.1
-  shared_preferences: ^2.2.3
-  google_fonts: ^6.2.1
-  flutter_local_notifications: ^17.0.0
-  intl: ^0.19.0
-
-  flutter_dotenv: ^5.2.1
-  postgres: ^2.4.0
-
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.17
   google_fonts: ^6.2.1
+  intl: ^0.20.2
+  fl_chart: ^0.62.0
+
 
 dev_dependencies:
   flutter_test:
@@ -67,9 +56,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  assets:
-    - assets/
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -77,7 +63,16 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - .env
+#      - .env
+      - assets/
+
+  fonts:
+    - family: Balsamiq_Sans
+      fonts:
+        - asset: assets/Balsamiq_Sans/BalsamiqSans-Regular.ttf
+        - asset: assets/Balsamiq_Sans/BalsamiqSans-BoldItalic.ttf
+        - asset: assets/Balsamiq_Sans/BalsamiqSans-Italic.ttf
+        - asset: assets/Balsamiq_Sans/BalsamiqSans-Bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

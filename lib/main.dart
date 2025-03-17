@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Balsamiq_Sans'),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(), // Show splash screen first
     );

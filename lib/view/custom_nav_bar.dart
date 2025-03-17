@@ -121,28 +121,32 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         ? Icons.chat
         : Icons.person;
 
-    return Container(
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        border: Border.all(color: Color(0xFF3674B5), width: 4),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 5,
-            offset: Offset(0, 2),
+    return GestureDetector(
+      onTap: () => widget.onTap(index), // Make the floating item clickable
+      child: Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          border: Border.all(color: Color(0xFF3674B5), width: 4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Center(
+          child: AnimatedOpacity(
+            duration: Duration(milliseconds: 100), // Faster disappearance
+            opacity: _iconOpacity,
+            child: Icon(icon, color: Color(0xFF3674B5), size: 30),
           ),
-        ],
-      ),
-      child: Center(
-        child: AnimatedOpacity(
-          duration: Duration(milliseconds: 100), // Faster disappearance
-          opacity: _iconOpacity,
-          child: Icon(icon, color: Color(0xFF3674B5), size: 30),
         ),
       ),
     );
   }
+
 }

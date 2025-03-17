@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+import 'languagebar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
@@ -8,6 +10,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get current date
+    String currentDate = DateFormat("dd MMM yyyy").format(DateTime.now());
+
     return PreferredSize(
       preferredSize: const Size.fromHeight(100),
       child: AppBar(
@@ -23,23 +28,31 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               bottomRight: Radius.circular(30),
             ),
           ),
-          padding: const EdgeInsets.only(top: 70, left: 16, right: 16, bottom: 16),
+          padding: const EdgeInsets.only(top: 90, left: 16, right: 16, bottom: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
+              Row(
                 children: [
                   Icon(Icons.calendar_today, color: Colors.white),
                   SizedBox(width: 8),
                   Text(
-                    "15 Mac 2025",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    currentDate,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ],
               ),
               GestureDetector(
                 onTap: () {
-                  print("Language icon tapped!"); // Debug print
+                  showGeneralDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    barrierLabel: "",
+                    transitionDuration: const Duration(milliseconds: 300),
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return const LanguageDrawer();
+                    },
+                  );
                 }, // Call function when language icon is tapped
                 child: const Icon(Icons.language, color: Colors.white),
               ),
