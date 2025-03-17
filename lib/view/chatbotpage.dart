@@ -54,7 +54,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
           // Message Input Section
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 24), // Increased bottom padding
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,

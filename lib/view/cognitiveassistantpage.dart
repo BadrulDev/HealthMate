@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:healthmate/view/cognitivegamepage.dart';
 import 'package:healthmate/view/custom_app_bar.dart';
 
 import 'custom_nav_bar.dart';
@@ -112,6 +113,12 @@ class _CognitiveAssistantPageState extends State<CognitiveAssistantPage> {
                   ElevatedButton(
                     onPressed: () {
                       //Go to game page or start game logic
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CognitiveGamePage(),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFD3E0E3),
