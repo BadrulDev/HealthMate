@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black54,
+                                  color: Colors.black,
                                   fontFamily: 'Inter',
                                 ),
                               ),
@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 50),
                             _isLoading
                                 ? const CircularProgressIndicator()
                                 : ElevatedButton(
